@@ -1,0 +1,61 @@
+replicaCount: 1
+
+image:
+  repository: carlosray/trip-api-gateway
+  pullPolicy: IfNotPresent
+imagePullSecrets: [ ]
+
+podAnnotations: { }
+podSecurityContext: { }
+securityContext: { }
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  hosts:
+    - host: trip-gateway.ipvz.ml
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+config:
+  mountPath: /etc/config
+  value:
+    spring:
+      application:
+        name: api-gateway
+    server:
+      port: 8181
+    gateway:
+      test:
+        message: "Hello!"
+        message2: "World!"
+
+secret:
+  mountPath: /etc/secret
+  value:
+    example: test
+
+tls:
+  crt: ""
+  key: ""
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 512Mi
+  requests:
+    cpu: 150m
+    memory: 256Mi
+
+probe:
+  readiness: /actuator/health/readiness
+  liveness: /actuator/health/liveness
+
+nodeSelector: { }
+tolerations: [ ]
+affinity: { }
