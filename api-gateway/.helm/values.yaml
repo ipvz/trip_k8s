@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: carlosray/trip-api-gateway
+  repository: docker.io/carlosray/trip-api-gateway #TODO изменить на github registry
   pullPolicy: IfNotPresent
 imagePullSecrets: [ ]
 
@@ -41,8 +41,8 @@ secret:
     example: test
 
 tls:
-  crt: ""
-  key: ""
+  crt: "crt"
+  key: "key"
 
 resources:
   limits:
