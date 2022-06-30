@@ -18,7 +18,7 @@ ingress:
   hosts:
     - host: trip-gateway.ipvz.ml
       paths:
-        - path: /
+        - path: /api
           pathType: Prefix
   tls: []
 
