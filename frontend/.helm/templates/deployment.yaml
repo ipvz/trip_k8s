@@ -1,4 +1,4 @@
-{{- $httpPort := default "8080" .Values.config.value.server.port -}}
+{{- $httpPort := default "80" .Values.service.port -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -52,18 +52,16 @@ spec:
           {{- end }}
           {{- with .Values.probe.liveness }}
           livenessProbe:
-            httpGet:
+            tcpSocket:
               port: {{ $httpPort }}
-              path: {{ .path }}
             failureThreshold: {{ .failureThreshold }}
             periodSeconds: {{ .periodSeconds }}
             successThreshold: {{ .successThreshold }}
           {{- end }}
           {{- with .Values.probe.startup }}
           startupProbe:
-            httpGet:
+            tcpSocket:
               port: {{ $httpPort }}
-              path: {{ .path }}
             failureThreshold: {{ .failureThreshold }}
             periodSeconds: {{ .periodSeconds }}
             successThreshold: {{ .successThreshold }}

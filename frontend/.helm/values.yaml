@@ -65,6 +65,21 @@ resources:
     cpu: 150m
     memory: 256Mi
 
+probe:
+  readiness:
+    path: /
+    failureThreshold: 3
+    periodSeconds: 10
+    successThreshold: 1
+  liveness:
+    failureThreshold: 3
+    periodSeconds: 10
+    successThreshold: 1
+  startup:
+    failureThreshold: 30
+    periodSeconds: 10
+    successThreshold: 1
+
 nodeSelector: { }
 tolerations: [ ]
 affinity: { }
