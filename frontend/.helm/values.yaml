@@ -23,7 +23,7 @@ ingress:
   tls: []
 
 config:
-  mountPath: /etc/nginx
+  mountPath: /etc/config
   value:
     nginx.conf: |
       events{}
