@@ -1,0 +1,70 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/ipvz/trip_frontend
+  pullPolicy: IfNotPresent
+imagePullSecrets: [ ]
+
+podAnnotations: { }
+podSecurityContext: { }
+securityContext: { }
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  hosts:
+    - host: trip.ipvz.ml
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+config:
+  mountPath: /etc/nginx
+  value:
+    nginx.conf: |
+      events{}
+      http {
+          upstream Backend {
+              server api-gateway;
+          }
+
+          include /etc/nginx/mime.types;
+          server {
+              listen 80;
+              server_name localhost;
+              root /usr/share/nginx/html;
+              index index.html;
+              location / {
+                  try_files $uri $uri/ /index.html;
+              }
+              location /hc {
+                  proxy_pass http://Backend/actuator/health;
+              }
+          }
+      }
+
+
+secret:
+  mountPath: /etc/secret
+  value:
+    example: test
+
+tls:
+  crt: "crt"
+  key: "key"
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 512Mi
+  requests:
+    cpu: 150m
+    memory: 256Mi
+
+nodeSelector: { }
+tolerations: [ ]
+affinity: { }
