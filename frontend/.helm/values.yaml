@@ -27,7 +27,7 @@ config:
   value:
     trip-apps.conf: |
       upstream Backend {
-          server api-gateway;
+          server trip-gateway.ipvz.ml;
       }
       server {
           listen 80;
