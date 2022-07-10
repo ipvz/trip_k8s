@@ -14,7 +14,7 @@ service:
   port: 80
 
 config:
-  mountPath: /etc/config
+  mountPath: /config
   value:
     psql:
       host: 'localhost'
