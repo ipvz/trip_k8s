@@ -1,0 +1,62 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/ipvz/trip_authentication
+  pullPolicy: IfNotPresent
+imagePullSecrets: [ ]
+
+podAnnotations: { }
+podSecurityContext: { }
+securityContext: { }
+
+service:
+  type: ClusterIP
+  port: 80
+
+config:
+  mountPath: /etc/config
+  value:
+    psql:
+      host: 'localhost'
+      database: 'mybase'
+      user: 'myuser'
+      passwd: 'mypass'
+      port: 5432
+
+secret:
+  mountPath: /etc/secret
+  value:
+    example: test
+
+tls:
+  crt: "crt"
+  key: "key"
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 512Mi
+  requests:
+    cpu: 150m
+    memory: 256Mi
+
+#probe:
+#  readiness:
+#    path: /actuator/health/readiness
+#    failureThreshold: 3
+#    periodSeconds: 10
+#    successThreshold: 1
+#  liveness:
+#    path: /actuator/health/liveness
+#    failureThreshold: 3
+#    periodSeconds: 10
+#    successThreshold: 1
+#  startup:
+#    path: /actuator/health/liveness
+#    failureThreshold: 30
+#    periodSeconds: 10
+#    successThreshold: 1
+
+nodeSelector: { }
+tolerations: [ ]
+affinity: { }
