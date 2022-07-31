@@ -26,14 +26,11 @@ config:
   mountPath: /etc/nginx/conf.d
   value:
     api.locations: |
-      upstream Backend {
-          server trip-gateway.ipvz.ml;
-      }
       location /api {
           proxy_pass http://api-gateway/api;
       }
       location /test {
-          proxy_pass http://Backend/api;
+          proxy_pass http://trip-gateway.ipvz.ml/api;
       }
 
 secret:
