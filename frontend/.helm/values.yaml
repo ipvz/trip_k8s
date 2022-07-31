@@ -23,7 +23,7 @@ ingress:
   tls: []
 
 config:
-  mountPath: /etc/nginx/sites-enabled
+  mountPath: /etc/nginx/conf.d
   value:
     trip-apps.conf: |
       upstream Backend {
