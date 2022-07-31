@@ -29,9 +29,6 @@ config:
       location /api {
           proxy_pass http://api-gateway/api;
       }
-      location /test {
-          proxy_pass http://trip-gateway.ipvz.ml/api;
-      }
 
 secret:
   mountPath: /etc/secret
