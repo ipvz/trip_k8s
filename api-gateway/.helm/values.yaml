@@ -14,7 +14,7 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   hosts:
     - host: trip-gateway.ipvz.ml
       paths:
