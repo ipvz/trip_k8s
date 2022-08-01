@@ -30,10 +30,9 @@ config:
         name: api-gateway
     server:
       port: 8181
-    gateway:
-      test:
-        message: "Hello!"
-        message2: "World!"
+    client:
+      auth:
+        uri: http://authenticate:80
 
 secret:
   mountPath: /etc/secret
