@@ -30,6 +30,8 @@ config:
         name: api-gateway
     server:
       port: 8181
+      servlet:
+        context-path: /api
     client:
       auth:
         uri: http://authenticate:80
