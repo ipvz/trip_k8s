@@ -30,11 +30,23 @@ config:
         name: api-gateway
     server:
       port: 8181
-      servlet:
-        context-path: /api
     client:
       auth:
         uri: http://authenticate:80
+    logging:
+      level:
+        reactor:
+          netty: INFO
+        org:
+          springframework:
+            cloud:
+              gateway: TRACE
+        org:
+          springframework:
+            cloud:
+              gateway:
+                filter:
+                  WeightCalculatorWebFilter: INFO
 
 secret:
   mountPath: /etc/secret
