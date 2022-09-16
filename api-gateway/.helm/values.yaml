@@ -28,16 +28,6 @@ config:
     spring:
       application:
         name: api-gateway
-      cloud:
-        gateway:
-          routes:
-            - id: auth_docs
-              uri: ${client.auth.uri}
-              predicates:
-                - Path=/api/auth/docs
-                - Method=GET
-              filters:
-                - StripPrefix=2
     server:
       port: 8181
     client:
